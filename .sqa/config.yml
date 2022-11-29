@@ -1,0 +1,66 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/openaire/iis:
+      branch: master
+      repo: https://github.com/openaire/iis
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/openaire/iis git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-green-dolphin.sh
+        container: qc.acc_stuffy-emerald-mole
+  QC.Doc:
+    repos:
+      github.com/openaire/iis find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-pear-dollar.sh
+        container: qc.doc_snappy-tangerine-armadillo
+      github.com/openaire/iis git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-cyan-mongoose.sh
+        container: qc.doc_slimy-champagne-rabbit
+      github.com/openaire/iis markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-tangerine-millipede.sh
+        container: qc.doc_goopy-aquamarine-albatross
+  QC.Lic:
+    repos:
+      github.com/openaire/iis licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-cobalt-civet.sh
+        container: qc.lic_homely-corn-cassowary
+  QC.Sec:
+    repos:
+      github.com/openaire/iis bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-yellow-gibbon.sh
+        container: qc.sec_wheezy-crimson-hummingbird
+  QC.Sty:
+    repos:
+      github.com/openaire/iis checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.whiny-grey-capybara.sh
+        container: qc.sty_homey-aqua-antelope
+      github.com/openaire/iis flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-cornflower-rhinoceros.sh
+        container: qc.sty_geeky-champagne-tarsier
+      github.com/openaire/iis jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-brown-spoonbill.sh
+        container: qc.sty_slaphappy-magnolia-raccoon
+  QC.Ver:
+    repos:
+      github.com/openaire/iis get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-wisteria-opossum.sh
+        container: qc.ver_shabby-cinnabar-ray
+timeout: 1800
